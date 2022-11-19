@@ -1,0 +1,27 @@
+services:
+  tutorials:
+    build: ./tutorials
+    volumes:
+      - ./tutorials:/tutorials
+    ports:
+      - 8001:8000
+    image: tutorials:django
+    container_name: tutorials_Web
+    command: python manage.py runsslserver 0:8000
+    restart: always
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=tutorials
+      - POSTGRES_USER=mark
+      - POSTGRES_PASSWORD=4MY:rftw
+    container_name: tutorials_db
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - tutorials_pgdb:/var/lib/postgresql/data
+volumes:
+  tutorials_pgdb:

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div id="" class="" role="">
+		{% for content in contents %}
+			<div id="" class="section" >
+				<dt>
+					<h2 class="result-title">
+						<a href="{% url 'learned:detail' content.id %}">{{ content.heading }}</a>
+					</h2>
+					<span class="meta breadcrumbs">{{ content.subheading }}</span>
+				</dt>
+			</div>
+
+
+		{% endfor %}
+	</div>
+
+
+{% endblock %}

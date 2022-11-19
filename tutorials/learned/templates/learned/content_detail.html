@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div role="">
+
+		<div class="section">
+
+			<h1>{{ content.heading }}</h1>
+
+			<p>{{ content.subheading }}</p>
+
+		</div>
+		<div class="section">
+
+			<h2> Contents </h2>
+
+				<ul class="simple">
+					{% for step in content.step_set.all %}
+						<li>
+							<strong><a class="" id="" href="#{{step.step_name}}">{{ step.step_name }}</a> </strong>
+						</li>
+					{% endfor %}
+				</ul>
+		</div>
+
+
+		{% for step in content.step_set.all %}
+			<div class="section" id="{{step.step_name}}">
+				<h3>{{ step.step_name }}</h3>
+				{% for paragraph in step.paragraph_set.all %}
+					<!-- normal -->
+					{% if paragraph.text_type == 'NM' %}
+						<p>{{ paragraph.text }}</p>
+					{% elif paragraph.text_type == 'BU' %}
+					<!-- bullet -->
+						<ul class="simple">
+							<li>{{ paragraph.text }}</li>
+						</ul>
+					{% elif paragraph.text_type == 'NT' %}
+						<div class="admonition-where-to-get-help admonition">
+							<p class="first admonition-title">Note :</p>
+							<p class="last">{{ paragraph.text }}</p>
+						</div>
+					{% elif paragraph.text_type == 'CD' %}
+						<div class="literal-block-wrapper docutils container" id="id6">
+							<div class="code-block-caption">
+								<span class="caption-text">
+									<code class="docutils literal notranslate">
+										<span class="pre">{{ paragraph.head }}</span>
+									</code>
+								</span>
+								<a class="headerlink" href="#id6" title="Permalink to this code">¶</a>
+							</div>
+							<div class="highlight-python notranslate">
+								<div class="highlight">
+									<pre><span></span><span class="kn">{{ paragraph.text }}</span></pre>
+								</div>
+							</div>
+						</div>
+
+					{% else %}
+						<div class="highlight-python notranslate">
+							<div class="highlight">
+								<pre>
+									<span class="s1"><strong>Invalid Paragraph Type</strong></span>
+								</pre>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endfor %}
+
+
+
+
+
+	</div>
+{% endblock %}

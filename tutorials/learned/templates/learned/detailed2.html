@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div role="main">
+		<div class="section" id="s-django-documentation">
+			<span id="django-documentation"></span>
+			<h1>
+				{{ content.title }}<a class="headerlink" href="#" title="Permalink to this headline">¶</a>
+			</h1>
+			<p class="rubric">{{ content.subheading }}</p>
+			<div class="section" id="s-first-steps">
+				<span id="s-index-first-steps"></span>
+				<span id="first-steps"></span>
+				<span id="index-first-steps"></span>
+				<h2>
+					Contents
+					<a class="headerlink" href="#" title="Permalink to this headline">¶</a>
+				</h2>
+				<ul class="simple">
+					{% for step in content.steps %}
+						<li>
+							<strong><a class="" id="" href="#{{step.step_name}}">{{ step.step_name }}</a> </strong>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% for step in content.steps %}
+				<div class="section" id="{{step.step_name}}">
+					<h2>{{ step.step_name }}</h2>
+					{% for paragraph in step.paragraphs %}
+						<!-- normal -->
+						{% if paragraph.text_type == 'normal' %}
+							<p>{{ paragraph.text }}</p>
+						{% elif paragraph.text_type == 'bullet' %}
+						<!-- bullet -->
+							<ul class="simple">
+								<li>{{ paragraph.text }}</li>
+							</ul>
+						{% elif paragraph.text_type == 'note' %}
+							<div class="admonition-where-to-get-help admonition">
+								<p class="first admonition-title">Note :</p>
+								<p class="last">{{ paragraph.text }}</p>
+							</div>
+						{% elif paragraph.text_type == 'code' %}
+							<div class="literal-block-wrapper docutils container" id="id6">
+								<div class="code-block-caption">
+									<span class="caption-text">
+										<code class="docutils literal notranslate">
+											<span class="pre">Terminal</span>
+										</code>
+									</span>
+									<a class="headerlink" href="#id6" title="Permalink to this code">¶</a>
+								</div>
+								<div class="highlight-python notranslate">
+									<div class="highlight">
+										<pre><span></span><span class="kn">{{ paragraph.text }}</span></pre>
+									</div>
+								</div>
+							</div>
+
+						{% else %}
+							<div class="highlight-python notranslate">
+								<div class="highlight">
+									<pre>
+										<span class="s1"><strong>Invalid Paragraph Type</strong></span>
+									</pre>
+								</div>
+						{% endif %}
+					{% endfor %}
+			{% endfor %}
+		</div>
+
+	</div>
+{% endblock %}
