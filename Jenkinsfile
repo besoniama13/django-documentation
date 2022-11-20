@@ -24,7 +24,7 @@ pipeline {
         stage('Rebuild and Deploy....') {
             steps {
                 echo 'Rebuilding and Deploying....'
-                sh 'sudo docker-compose up --build'
+                sh 'sudo docker-compose up --build -d'
             }
         }
     }
