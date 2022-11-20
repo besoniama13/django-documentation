@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                docker compose build
+                docker-compose build
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                docker compose up -d
+                docker-compose up -d
             }
         }
     }
