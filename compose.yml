@@ -1,8 +1,6 @@
 services:
   tutorials:
     build: ./tutorials
-    volumes:
-      - ./tutorials:/tutorials
     ports:
       - 8001:8000
     image: tutorials:django
