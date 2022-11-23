@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'node-01' }
+    agent { label 'django-documentation' }
 
     stages {
         stage('Build') {
